@@ -13,7 +13,7 @@ from django.utils.log import DEFAULT_LOGGING
 
 from sentry_sdk.integrations.django import DjangoIntegration
 
-config = dotenv_values(".env.uat")
+config = dotenv_values(".env.local")
 
 for key, value in config.items():
     os.environ[key] = value
@@ -78,11 +78,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('POSTGRES_DB', default='ramailo_dev'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'USER': os.environ.get('POSTGRES_USER', default='postgres'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', default='postgres'),
         'HOST': os.environ.get('POSTGRES_HOST', default='127.0.0.1'),
         'PORT': int(os.environ.get('POSTGRES_PORT', default=5432)),
-
     }
 }
 
