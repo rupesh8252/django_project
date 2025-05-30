@@ -10,6 +10,7 @@ from ramailo.views.kyc import set_email, verify_email
 from ramailo.views.notification import set_fcm_device
 from ramailo.views.onboarding import LoginView, OtpView, logout
 from ramailo.views.user import ProfileView
+from ramailo.views.blog import blog_post, specific_blog, get_post_comments , update_post, delete_post
 
 from .openapi_info import openapi_info
 
@@ -53,6 +54,13 @@ api_paths = [
     path('email/', set_email, name='set link email'),
     path('kyc/email/validate/<token>/', verify_email, name='verify link email'),
 
+    #blog
+    path('posts/', blog_post , name="blog post"),
+    path('posts/<post_id>/', specific_blog , name="specific blog post"),
+    path('posts/<post_id>/comments/', get_post_comments, name='post-comments'),
+    path('posts/<post_id>/', update_post, name='update-post'),
+    path('posts/<post_id>/', delete_post, name='delete-post'),
+
     # feedbacks
     path('feedback/', feedback, name='user_feedback'),
     path('ticket/', raise_ticket, name='raise_ticket'),
@@ -60,6 +68,7 @@ api_paths = [
     # fcm device
     path('fcm/register/', set_fcm_device, name='register_fcm_device'),
 
+    
 ]
 
 urlpatterns = utils_paths + api_paths
